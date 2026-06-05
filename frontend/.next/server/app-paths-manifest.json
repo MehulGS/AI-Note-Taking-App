@@ -1,0 +1,8 @@
+{
+  "/page": "app/page.js",
+  "/login/page": "app/login/page.js",
+  "/notes/new/page": "app/notes/new/page.js",
+  "/notes/page": "app/notes/page.js",
+  "/share/[token]/page": "app/share/[token]/page.js",
+  "/notes/[id]/page": "app/notes/[id]/page.js"
+}
