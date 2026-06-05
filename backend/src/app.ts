@@ -11,7 +11,12 @@ import { failure } from './utils/response.js';
 export const app = new Hono();
 
 app.use('*', secureHeaders());
-app.use('*', cors({ origin: env.CLIENT_URL, allowMethods: ['GET', 'POST', 'DELETE', 'OPTIONS'], allowHeaders: ['Content-Type', 'Authorization'] }));
+const allowedOrigins = env.CLIENT_URL.split(',').map((o) => o.trim());
+app.use('*', cors({
+  origin: (origin) => allowedOrigins.includes(origin) ? origin : allowedOrigins[0],
+  allowMethods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use('*', requestLogger);
 
 app.get('/health', (c) => c.json({ success: true, data: { status: 'ok' } }));
