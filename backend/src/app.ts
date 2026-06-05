@@ -15,6 +15,7 @@ app.use('*', cors({ origin: env.CLIENT_URL, allowMethods: ['GET', 'POST', 'DELET
 app.use('*', requestLogger);
 
 app.get('/health', (c) => c.json({ success: true, data: { status: 'ok' } }));
+app.get('/api/health', (c) => c.json({ success: true, data: { status: 'ok', timestamp: new Date().toISOString() } }));
 app.route('/api/auth', authRoutes);
 app.route('/api/notes', noteRoutes);
 app.route('/api/share', shareRoutes);
